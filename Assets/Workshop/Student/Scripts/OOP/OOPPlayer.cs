@@ -71,7 +71,7 @@ namespace Solution
             base.Move(direction);
             mapGenerator.MoveEnemies();
             // Save the state AFTER the move
-      
+            actionHistoryManager.SaveStateForUndo(new Vector2(positionX, positionY));
         }
 
         public void UseFireStorm()
