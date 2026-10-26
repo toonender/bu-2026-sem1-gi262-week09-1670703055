@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Assignment
 {
@@ -97,12 +97,25 @@ namespace Assignment
 
         public string ASN01_ReverseString(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> stack = new Stack<char>();
+            foreach (char character in str)
+            {
+                stack.Push(character);
+            }
+
+            StringBuilder reversed = new StringBuilder(str.Length);
+            while (stack.Count > 0)
+            {
+                reversed.Append(stack.Pop());
+            }
+
+            return reversed.ToString();
         }
 
         public bool ASN02_StackPalindrome(string str)
         {
-            throw new NotImplementedException();
+            string reversed = ASN01_ReverseString(str);
+            return str == reversed;
         }
 
         #endregion
@@ -111,7 +124,31 @@ namespace Assignment
 
         public bool EX01_ParenthesesChecker(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> stack = new Stack<char>();
+            foreach (char bracket in str)
+            {
+                if (bracket == '(' || bracket == '[' || bracket == '{')
+                {
+                    stack.Push(bracket);
+                }
+                else if (bracket == ')' || bracket == ']' || bracket == '}')
+                {
+                    if (stack.Count == 0)
+                    {
+                        return false;
+                    }
+
+                    char opening = stack.Pop();
+                    if ((bracket == ')' && opening != '(') ||
+                        (bracket == ']' && opening != '[') ||
+                        (bracket == '}' && opening != '{'))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return stack.Count == 0;
         }
 
         #endregion
